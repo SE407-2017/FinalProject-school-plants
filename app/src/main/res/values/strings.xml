@@ -12,4 +12,12 @@
     <string name="jac1">这是月季</string>
     <string name="han1">这是黄馨</string>
     <string name="lin1">这是广玉兰</string>
+
+
+    <string name="search">Search For</string>
+    <string name="go">Go!</string>
+    <string name="background">背景</string>
+
+
+    <string name="reaults">这里显示搜索结果</string>
 </resources>

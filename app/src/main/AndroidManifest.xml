@@ -45,5 +45,7 @@
         </service>
         <activity android:name=".plants">
         </activity>
+        <activity android:name=".results">
+        </activity>
     </application>
 </manifest>
