@@ -1,4 +1,4 @@
-package finalproject_plants;
+package com.example.tony.finalproject_plants;
 
 
 import android.app.FragmentTransaction;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FrameLayout ly_content;
 
     private noteclass f1;
-    private MapFragment f2;
+    private mapclass f2;
     private findclass f3;
     private moreclass f4;
 
@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SDKInitializer.initialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        mapclass f = new mapclass();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container,f);
+        transaction.show(f);
+        transaction.commit();
+
         bindView();
 
         createSQL();
@@ -107,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(f1!=null){
             transaction.hide(f1);
         }
-        if(f2!=null){
+        if(f2!=null) {
             transaction.hide(f2);
         }
         if(f3!=null){
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txt_map:
                 selected();
                 tabmap.setSelected(true);
-                    f2 = new MapFragment();
+                    f2 = new mapclass();
                     transaction.add(R.id.fragment_container,f2);
                 break;
 

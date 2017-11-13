@@ -1,4 +1,4 @@
-package finalproject_plants;
+package com.example.tony.finalproject_plants;
 
 import org.litepal.crud.DataSupport;
 
