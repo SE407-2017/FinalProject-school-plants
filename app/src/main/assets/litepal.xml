@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="plants"></dbname>
-    <version value="1"></version>
+    <version value="2"></version>
     <list>
-        <mapping class="finalproject_plants.Plant"/>
+        <mapping class="com.example.tony.finalproject_plants.Plant"/>
     </list>
 </litepal>

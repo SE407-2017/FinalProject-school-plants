@@ -1,4 +1,4 @@
-package finalproject_plants;
+package com.example.tony.finalproject_plants;
 
 import android.content.Context;
 import android.graphics.Bitmap;

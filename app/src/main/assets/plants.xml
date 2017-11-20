@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plants>
     <plant id="1">
-        <name>example plant1</name>
-        <description_path>plant_descriptions/plant1.txt</description_path>
-        <photo_path>plant_photos/plant1.jpg</photo_path>
+        <name>photinia</name>
+        <description_path>plant_descriptions/photinia.txt</description_path>
+        <photo_path>plant_photos/photinia.png</photo_path>
     </plant>
     <plant id="2">
-        <name>example plant2</name>
-        <description_path>plant_descriptions/plant2.txt</description_path>
-        <photo_path>plant_photos/plant2.jpg</photo_path>
+        <name>planch</name>
+        <description_path>plant_descriptions/planch.txt</description_path>
+        <photo_path>plant_photos/planch.png</photo_path>
+    </plant>
+    <plant id="3">
+        <name>jacq</name>
+        <description_path>plant_descriptions/jacq.txt</description_path>
+        <photo_path>plant_photos/jacq.png</photo_path>
+    </plant>
+    <plant id="4">
+        <name>hance</name>
+        <description_path>plant_descriptions/hance.txt</description_path>
+        <photo_path>plant_photos/hance.png</photo_path>
+    </plant>
+    <plant id="5">
+        <name>linn</name>
+        <description_path>plant_descriptions/linn.txt</description_path>
+        <photo_path>plant_photos/linn.png</photo_path>
     </plant>
 </plants>

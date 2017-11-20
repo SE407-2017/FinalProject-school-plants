@@ -1,4 +1,4 @@
-package finalproject_plants;
+package com.example.tony.finalproject_plants;
 
 
 import android.app.FragmentTransaction;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FrameLayout ly_content;
 
     private noteclass f1;
-    private MapFragment f2;
+    private mapclass f2;
     private findclass f3;
     private moreclass f4;
 
@@ -47,45 +47,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SDKInitializer.initialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        mapclass f = new mapclass();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container,f);
+        transaction.show(f);
+        transaction.commit();
+
         bindView();
 
-        checkStartStatus();//数据库：查看是否第一次启动，创建数据库
-        testDatabase();//数据库测试用，可以看看怎么使用数据库
-
-
+        createSQL();
     }
     //数据库
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void testDatabase(){
-        //找出所有植物
-        List<Plant> plantList = Plant.getAllPalnts();
-        Log.d("mainactivity", "testDatabase: " + plantList.size());
-        for (Plant p : plantList){
-            Log.d("mainactivity", "testDatabase: " + p.getDescriptionPath());
-
-        }
-        //根据名称查找数据
-        Plant plant = Plant.getPlantByName("example plant1");
-        //通过文件处理工具加载对应的描述文字及图片
-        FileUtils fu = new FileUtils(getApplicationContext());
-        String des = fu.getPlantDescription(plant);//描述
-        Bitmap img = fu.getPlantBitmap(plant);//图片
-        Log.d("mainactivity", "testDatabase: " + des);
-    }
-    private void checkStartStatus(){
-        SharedHelper helper = new SharedHelper(getApplicationContext());
-        Boolean is_first_start = helper.readStartStatus();
-        if (is_first_start){
-            //第一次启动时的操作
-            createSQL();
-            helper.saveStartStatus(false);
-        }
-    }
 
     //创建数据库
     private void createSQL(){
         SQLiteDatabase db = Connector.getDatabase();
         try {
+            DataSupport.deleteAll(Plant.class);
             InputStream xmlFile = MainActivity.this.getAssets().open("plants.xml");
             List<Plant> plantList = XmlHelper.getPalntList(xmlFile);
             DataSupport.saveAll(plantList);
@@ -94,6 +73,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void testDatabase(){
+        //找出所有植物
+        List<Plant> plantList = Plant.getAllPlants();
+        Log.d("mainactivity", "testDatabase: " + plantList.size());
+        for (Plant p : plantList){
+            Log.d("mainactivity", "testDatabase: " + p.getDescriptionPath());
+        }
+        //根据名称查找数据
+        Plant plant = Plant.getPlantByName("example plant1");
+        //通过文件处理工具加载对应的描述文字及图片
+        FileUtils fu = new FileUtils(getApplicationContext());
+        String des = fu.getPlantDescription(plant);//描述
+        Bitmap img = fu.getPlantBitmap(plant);//图片
+        Log.d("mainactivity", "testDatabase: " + des);
     }
     /*获得植物名称、图片、描述
      *描述文件文字存在main/assets/plant_descriptions
@@ -134,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(f1!=null){
             transaction.hide(f1);
         }
-        if(f2!=null){
+        if(f2!=null) {
             transaction.hide(f2);
         }
         if(f3!=null){
@@ -160,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txt_map:
                 selected();
                 tabmap.setSelected(true);
-                    f2 = new MapFragment();
+                    f2 = new mapclass();
                     transaction.add(R.id.fragment_container,f2);
                 break;
 

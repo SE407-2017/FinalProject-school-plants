@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="finalproject_plants">
+    package="com.example.tony.finalproject_plants">
 
     <!-- 这个权限用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
@@ -37,7 +37,7 @@
         </activity>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="GvaI6fS0YwWXCDUBxxQQG2SbjSqYqUZ9" />
+            android:value="O1sRNH3svOGmGVtanGqi1VTTFlRgfeQZ" />
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
