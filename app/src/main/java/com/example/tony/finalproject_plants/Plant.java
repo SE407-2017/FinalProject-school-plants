@@ -1,5 +1,7 @@
 package com.example.tony.finalproject_plants;
 
+import android.widget.ImageButton;
+
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
@@ -13,6 +15,7 @@ public class Plant extends DataSupport {
     private String name;
     private String photoPath;
     private String descriptionPath;
+    public ImageButton imgbtn;
 
     public Plant() {
     }
@@ -56,7 +59,7 @@ public class Plant extends DataSupport {
         this.descriptionPath = descriptionPath;
     }
     //所有plant
-    public static List<Plant> getAllPalnts(){
+    public static List<Plant> getAllPlants(){
         List<Plant> plantList = DataSupport.findAll(Plant.class);
         return plantList;
     }

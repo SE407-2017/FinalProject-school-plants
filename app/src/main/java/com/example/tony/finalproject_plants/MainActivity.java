@@ -74,6 +74,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void testDatabase(){
+        //找出所有植物
+        List<Plant> plantList = Plant.getAllPlants();
+        Log.d("mainactivity", "testDatabase: " + plantList.size());
+        for (Plant p : plantList){
+            Log.d("mainactivity", "testDatabase: " + p.getDescriptionPath());
+        }
+        //根据名称查找数据
+        Plant plant = Plant.getPlantByName("example plant1");
+        //通过文件处理工具加载对应的描述文字及图片
+        FileUtils fu = new FileUtils(getApplicationContext());
+        String des = fu.getPlantDescription(plant);//描述
+        Bitmap img = fu.getPlantBitmap(plant);//图片
+        Log.d("mainactivity", "testDatabase: " + des);
+    }
     /*获得植物名称、图片、描述
      *描述文件文字存在main/assets/plant_descriptions
      * 图片存在main/assets/plant_photos
