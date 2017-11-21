@@ -17,6 +17,6 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        android:id="@+id/han1"/>
+        android:id="@+id/allplantslayout"/>
 
 </android.support.constraint.ConstraintLayout>
