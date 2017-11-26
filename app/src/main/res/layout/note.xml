@@ -1,94 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:scrollbars="vertical"
-    android:fadingEdge="vertical">
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context="com.example.user.plantsapp.MainActivity">
+        android:layout_height="match_parent" />
 
-        <ImageView
-            android:contentDescription="@string/background"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/search2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:id="@+id/imageView"/>
-
-        <ImageButton
-            android:contentDescription="@string/photinia"
-            android:layout_width="350dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp"
-            android:scaleType="fitXY"
-            android:id="@+id/photinia" />
-
-        <ImageButton
-            android:contentDescription="@string/planch"
-            android:layout_width="350dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/photinia"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:scaleType="fitXY"
-            android:id="@+id/planch" />
-
-        <ImageButton
-            android:contentDescription="@string/jacq"
-            android:layout_width="350dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/planch"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:scaleType="fitXY"
-            android:id="@+id/jacq"/>
-
-        <ImageButton
-            android:contentDescription="@string/hance"
-            android:layout_width="350dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/jacq"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:scaleType="fitXY"
-            android:id="@+id/hance"/>
-
-        <ImageButton
-            android:contentDescription="@string/linn"
-            android:layout_width="350dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/hance"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:scaleType="fitXY"
-            android:id="@+id/linn"/>
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</LinearLayout>

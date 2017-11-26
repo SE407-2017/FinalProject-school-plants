@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
         android:id="@+id/tab_menu"
         android:layout_width="match_parent"
@@ -16,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tab_menu_1bg"
+            android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
             android:drawableTop="@drawable/tab_menu_note"
             android:gravity="center"
@@ -28,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tab_menu_1bg"
+            android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
             android:drawableTop="@drawable/tab_menu_map"
             android:gravity="center"
@@ -40,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tab_menu_1bg"
+            android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
             android:drawableTop="@drawable/tab_menu_find"
             android:gravity="center"
@@ -48,23 +47,23 @@
             android:text="搜索"/>
 
         <TextView
-            android:id="@+id/txt_more"
+            android:id="@+id/txt_add"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tab_menu_1bg"
+            android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_rand"
+            android:drawableTop="@drawable/tab_menu_add"
             android:gravity="center"
-            android:textColor="@drawable/tab_menu_rand_text"
-            android:text="更多"/>
+            android:textColor="@drawable/tab_menu_add_text"
+            android:text="添加"/>
 
     </LinearLayout>
 
     <View
         android:id="@+id/div_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="2dp"
         android:background="@color/text_gray"
         android:layout_above="@id/tab_menu"/>
 
