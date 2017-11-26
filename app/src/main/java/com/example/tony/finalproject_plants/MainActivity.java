@@ -3,15 +3,17 @@ package com.example.tony.finalproject_plants;
 import android.app.FragmentTransaction;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
+
 import android.support.annotation.RequiresApi;
-import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -25,17 +27,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
     private TextView tabNote;
     private TextView tabMap;
     private TextView tabAdd;
     private TextView tabFind;
 
-    private noteClass noteFragment;
-    private mapClass mapFragmet;
-    private findClass findFragmet;
+    private noteclass noteFragment;
+    private mapclass mapFragmet;
+    private findclass findFragmet;
     private addClass addFragmet;
+
+    Typeface mtypeface;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -43,9 +47,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_main);
 
         setDefaultFragment();
+
+        mtypeface=Typeface.createFromAsset(getAssets(),"hey.ttf");
+
         bindView();
         createSQL();
     }
@@ -59,25 +66,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.txt_note:
                 tabNote.setSelected(true);
                 if (noteFragment==null){
-                    noteFragment = new noteClass();
+                    noteFragment = new noteclass();
                 }
                 transaction.replace(R.id.fragment_container,noteFragment);
                 break;
             case R.id.txt_map:
                 tabMap.setSelected(true);
                 if (mapFragmet==null){
-                    mapFragmet = new mapClass();
+                    mapFragmet = new mapclass();
                 }
                 transaction.replace(R.id.fragment_container,mapFragmet);
                 break;
             case R.id.txt_find:
                 tabFind.setSelected(true);
                 if (findFragmet==null){
-                    findFragmet = new findClass();
+                    findFragmet = new findclass();
                 }
                 transaction.replace(R.id.fragment_container,findFragmet);
                 break;
-            case R.id.txt_more:
+            case R.id.txt_add:
                 tabAdd.setSelected(true);
                 if (addFragmet==null){
                     addFragmet = new addClass();
@@ -135,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //设置初始默认fragment
     private void setDefaultFragment(){
-        mapFragmet = new mapClass();
+        mapFragmet = new mapclass();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container,mapFragmet);
         transaction.show(mapFragmet);
@@ -156,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //重置所有文本的选中状态
-    private void selected(){
+    public void selected(){
         tabNote.setSelected(false);
         tabAdd.setSelected(false);
         tabMap.setSelected(false);

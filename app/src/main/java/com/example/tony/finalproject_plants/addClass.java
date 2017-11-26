@@ -38,7 +38,7 @@ public class addClass extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
-        View view=layoutInflater.inflate(R.layout.add,false);
+        View view=layoutInflater.inflate(R.layout.add,container,false);
 
         take_photo=(Button) view.findViewById(R.id.take_photo);
         new_image=(ImageView) view.findViewById(R.id.new_plant_image);
