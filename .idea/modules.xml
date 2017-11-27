@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FinalProject-school-plants.iml" filepath="$PROJECT_DIR$/FinalProject-school-plants.iml" />
+      <module fileurl="file://G:\FinalProject-school-plants\FinalProject-school-plants.iml" filepath="G:\FinalProject-school-plants\FinalProject-school-plants.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FinalProject-school-plants_hyl.iml" filepath="$PROJECT_DIR$/FinalProject-school-plants_hyl.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://G:\FinalProject-school-plants\app\app.iml" filepath="G:\FinalProject-school-plants\app\app.iml" />
     </modules>
   </component>
 </project>

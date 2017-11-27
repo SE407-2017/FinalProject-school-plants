@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+     <TextView
         android:id="@+id/results"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/reaults"
+         android:gravity="center"
+         android:background="@drawable/result"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
