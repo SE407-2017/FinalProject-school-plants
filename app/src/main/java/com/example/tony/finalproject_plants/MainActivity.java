@@ -1,9 +1,9 @@
 package com.example.tony.finalproject_plants;
 
-
 import android.app.FragmentTransaction;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -26,19 +27,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private TextView tabnote;
-    private TextView tabmap;
-    private TextView tabmore;
-    private TextView tabfind;
 
-    private FrameLayout ly_content;
+    private TextView tabNote;
+    private TextView tabMap;
+    private TextView tabAdd;
+    private TextView tabFind;
 
-    private noteclass f1;
-    private mapclass f2;
-    private findclass f3;
-    private moreclass f4;
+    private noteclass noteFragment;
+    private mapclass mapFragmet;
+    private findclass findFragmet;
+    private addClass addFragmet;
+
+    Typeface mtypeface;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -47,16 +48,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SDKInitializer.initialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        mapclass f = new mapclass();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_container,f);
-        transaction.show(f);
-        transaction.commit();
+
+        setDefaultFragment();
+
+        mtypeface=Typeface.createFromAsset(getAssets(),"hey.ttf");
 
         bindView();
-
         createSQL();
     }
+
+    @Override
+    public void onClick(View view) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        hideAllFragment(transaction);
+        selected();
+        switch(view.getId()){
+            case R.id.txt_note:
+                tabNote.setSelected(true);
+                if (noteFragment==null){
+                    noteFragment = new noteclass();
+                }
+                transaction.replace(R.id.fragment_container,noteFragment);
+                break;
+            case R.id.txt_map:
+                tabMap.setSelected(true);
+                if (mapFragmet==null){
+                    mapFragmet = new mapclass();
+                }
+                transaction.replace(R.id.fragment_container,mapFragmet);
+                break;
+            case R.id.txt_find:
+                tabFind.setSelected(true);
+                if (findFragmet==null){
+                    findFragmet = new findclass();
+                }
+                transaction.replace(R.id.fragment_container,findFragmet);
+                break;
+            case R.id.txt_add:
+                tabAdd.setSelected(true);
+                if (addFragmet==null){
+                    addFragmet = new addClass();
+                }
+                transaction.replace(R.id.fragment_container,addFragmet);
+                break;
+        }
+        transaction.commit();
+    }
+
     //数据库
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 
@@ -102,79 +140,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     */
     //数据库结束
 
+    //设置初始默认fragment
+    private void setDefaultFragment(){
+        mapFragmet = new mapclass();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container,mapFragmet);
+        transaction.show(mapFragmet);
+        transaction.commit();
+    }
+
     //UI组件初始化与事件绑定
     private void bindView() {
-        tabnote = (TextView)this.findViewById(R.id.txt_note);
-        tabmap = (TextView)this.findViewById(R.id.txt_map);
-        tabfind = (TextView)this.findViewById(R.id.txt_find);
-        tabmore = (TextView)this.findViewById(R.id.txt_more);
-        ly_content = (FrameLayout) findViewById(R.id.fragment_container);
+        tabNote = (TextView)this.findViewById(R.id.txt_note);
+        tabMap = (TextView)this.findViewById(R.id.txt_map);
+        tabFind = (TextView)this.findViewById(R.id.txt_find);
+        tabAdd = (TextView)this.findViewById(R.id.txt_add);
 
-        tabnote.setOnClickListener(this);
-        tabmore.setOnClickListener(this);
-        tabfind.setOnClickListener(this);
-        tabmap.setOnClickListener(this);
-
+        tabNote.setOnClickListener(this);
+        tabAdd.setOnClickListener(this);
+        tabFind.setOnClickListener(this);
+        tabMap.setOnClickListener(this);
     }
 
     //重置所有文本的选中状态
     public void selected(){
-        tabnote.setSelected(false);
-        tabmore.setSelected(false);
-        tabmap.setSelected(false);
-        tabfind.setSelected(false);
+        tabNote.setSelected(false);
+        tabAdd.setSelected(false);
+        tabMap.setSelected(false);
+        tabFind.setSelected(false);
     }
 
     //隐藏所有Fragment
-    public void hideAllFragment(FragmentTransaction transaction){
-        if(f1!=null){
-            transaction.hide(f1);
+    private void hideAllFragment(FragmentTransaction transaction){
+        if(noteFragment!=null){
+            transaction.hide(noteFragment);
         }
-        if(f2!=null) {
-            transaction.hide(f2);
+        if(mapFragmet!=null) {
+            transaction.hide(mapFragmet);
         }
-        if(f3!=null){
-            transaction.hide(f3);
+        if(findFragmet!=null){
+            transaction.hide(findFragmet);
         }
-        if(f4!=null){
-            transaction.hide(f4);
+        if(addFragmet!=null){
+            transaction.hide(addFragmet);
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        hideAllFragment(transaction);
-        switch(v.getId()){
-            case R.id.txt_note:
-                selected();
-                tabnote.setSelected(true);
-                    f1 =  new noteclass();
-                    transaction.add(R.id.fragment_container,f1);
-                break;
-
-            case R.id.txt_map:
-                selected();
-                tabmap.setSelected(true);
-                    f2 = new mapclass();
-                    transaction.add(R.id.fragment_container,f2);
-                break;
-
-            case R.id.txt_find:
-                selected();
-                tabfind.setSelected(true);
-                    f3 = new findclass();
-                    transaction.add(R.id.fragment_container,f3);
-                break;
-
-            case R.id.txt_more:
-                selected();
-                tabmore.setSelected(true);
-                    f4 = new moreclass();
-                    transaction.add(R.id.fragment_container,f4);
-                break;
-        }
-
-        transaction.commit();
     }
 }

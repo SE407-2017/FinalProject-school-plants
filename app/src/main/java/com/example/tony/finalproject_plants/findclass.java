@@ -18,8 +18,8 @@ public class findclass extends Fragment {
     private Plant respla;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.find, container, false);
-        finbtn = view.findViewById(R.id.button);
-        inp = view.findViewById(R.id.searchtext);
+        finbtn = view.findViewById(R.id.search_button);
+        inp = view.findViewById(R.id.search_text);
         finbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
