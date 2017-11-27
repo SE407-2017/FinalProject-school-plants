@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import java.util.Timer;
-import java.util.Timer;
 import java.util.TimerTask;
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 
 /**
  * Created by Paul Hu on 2017/11/26.
