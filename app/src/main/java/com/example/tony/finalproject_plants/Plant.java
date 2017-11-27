@@ -16,15 +16,52 @@ public class Plant extends DataSupport {
     private String photoPath;
     private String descriptionPath;
     public ImageButton imgbtn;
+    private double lat;
+    private double lng;
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
+    public ImageButton getImgbtn() {
+        return imgbtn;
+    }
+
+    public void setImgbtn(ImageButton imgbtn) {
+        this.imgbtn = imgbtn;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
 
     public Plant() {
     }
 
-    public Plant(int id, String name, String photoPath, String descriptionPath) {
+    public Plant(int id, String name, String photoPath, String descriptionPath, Double lat, Double lng) {
         this.id = id;
         this.name = name;
         this.photoPath = photoPath;
         this.descriptionPath = descriptionPath;
+        this.imgbtn = imgbtn;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public int getId() {
