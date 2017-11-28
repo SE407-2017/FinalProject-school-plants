@@ -4,23 +4,17 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,6 +38,7 @@ public class noteclass extends Fragment {
             resourceId = textViewResourceId;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             Plant listPlants = getItem(position);
@@ -52,8 +47,8 @@ public class noteclass extends Fragment {
             if (convertView == null) {
                 view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
                 viewHolder = new ViewHolder();
-                viewHolder.plantImage = (ImageView) view.findViewById(R.id.plant_image);
-                viewHolder.plantName = (TextView) view.findViewById(R.id.plant_name);
+                viewHolder.plantImage = view.findViewById(R.id.plant_image);
+                viewHolder.plantName = view.findViewById(R.id.plant_name);
                 view.setTag(viewHolder);
             } else {
                 view = convertView;

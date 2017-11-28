@@ -2,25 +2,16 @@ package com.example.tony.finalproject_plants;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.tony.finalproject_plants.R;
 
 import java.io.File;
 
@@ -40,10 +31,10 @@ public class addClass extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
         View view=layoutInflater.inflate(R.layout.add,container,false);
 
-        take_photo=(Button) view.findViewById(R.id.take_photo);
-        new_image=(ImageView) view.findViewById(R.id.new_plant_image);
-        new_name=(EditText) view.findViewById(R.id.new_plant_name);
-        new_info=(EditText) view.findViewById(R.id.new_plant_info);
+        take_photo= view.findViewById(R.id.take_photo);
+        new_image= view.findViewById(R.id.new_plant_image);
+        new_name= view.findViewById(R.id.new_plant_name);
+        new_info= view.findViewById(R.id.new_plant_info);
 
         take_photo.setOnClickListener(new View.OnClickListener() {
             @Override

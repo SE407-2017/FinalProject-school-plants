@@ -13,12 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.MapFragment;
 
 import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
@@ -151,10 +148,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //UI组件初始化与事件绑定
     private void bindView() {
-        tabNote = (TextView)this.findViewById(R.id.txt_note);
-        tabMap = (TextView)this.findViewById(R.id.txt_map);
-        tabFind = (TextView)this.findViewById(R.id.txt_find);
-        tabAdd = (TextView)this.findViewById(R.id.txt_add);
+        tabNote = this.findViewById(R.id.txt_note);
+        tabMap = this.findViewById(R.id.txt_map);
+        tabFind = this.findViewById(R.id.txt_find);
+        tabAdd = this.findViewById(R.id.txt_add);
 
         tabNote.setOnClickListener(this);
         tabAdd.setOnClickListener(this);

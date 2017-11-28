@@ -11,18 +11,14 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.SupportMapFragment;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +57,7 @@ public class mapclass extends android.app.Fragment {
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.map, container, false);
-        mMapView = (TextureMapView) view.findViewById(R.id.map_view);
+        mMapView = view.findViewById(R.id.map_view);
         mBaiduMap = mMapView.getMap();// 从地图视图中获取百度地图实例对象
 // 设置地图初始化缩放比例
         msu = MapStatusUpdateFactory.zoomTo(17.0f);// 这里的显示等级第15级
@@ -196,7 +192,7 @@ public class mapclass extends android.app.Fragment {
         //在地图上添加Marker，并显示
         mMarkerA = (Marker)mBaiduMap.addOverlay(optionA);
 
-    };
+    }
 
 
 }
