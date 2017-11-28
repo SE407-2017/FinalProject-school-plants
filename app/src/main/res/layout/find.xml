@@ -7,20 +7,22 @@
 
     <TextView
         android:text="Search For"
+        android:textColor="@color/text_blue"
         android:textSize="40sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/colorPrimaryDark"
         android:layout_marginTop="100dp" />
 
     <EditText
         android:id="@+id/search_text"
         android:hint="请输入相应植物的英文名"
+        android:textColorHint="@color/text_blue"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:textColor="@color/text_blue"
         android:layout_marginLeft="36dp"
         android:layout_marginRight="36dp"
         android:layout_marginTop="30dp" />
@@ -28,6 +30,7 @@
     <Button
         android:id="@+id/search_button"
         android:text="GO!"
+        android:textColor="@color/text_blue"
         android:textSize="20sp"
         android:layout_marginTop="50dp"
         android:padding="5dp"

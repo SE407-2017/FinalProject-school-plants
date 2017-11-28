@@ -24,6 +24,7 @@
     <TextView
         android:text="植物名称"
         android:textSize="22sp"
+        android:textColor="@color/text_blue"
         android:layout_marginLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -31,7 +32,9 @@
     <EditText
         android:id="@+id/new_plant_name"
         android:hint="请输入植物名称"
+        android:textColorHint="@color/text_blue"
         android:textSize="16sp"
+        android:textColor="@color/text_blue"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_width="match_parent"
@@ -40,6 +43,7 @@
     <TextView
         android:text="植物简介"
         android:textSize="22sp"
+        android:textColor="@color/text_blue"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
@@ -48,7 +52,9 @@
     <EditText
         android:id="@+id/new_plant_info"
         android:hint="请简单介绍一下植物"
+        android:textColorHint="@color/text_blue"
         android:textSize="16sp"
+        android:textColor="@color/text_blue"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_width="match_parent"
@@ -57,6 +63,7 @@
     <Button
         android:id="@+id/submit"
         android:text="上传植物数据"
+        android:textColor="@color/text_blue"
         android:textSize="20sp"
         android:layout_marginTop="10dp"
         android:padding="5dp"

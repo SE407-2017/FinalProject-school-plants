@@ -62,30 +62,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(view.getId()){
             case R.id.txt_note:
                 tabNote.setSelected(true);
-                if (noteFragment==null){
-                    noteFragment = new noteclass();
-                }
+                noteFragment = new noteclass();
                 transaction.replace(R.id.fragment_container,noteFragment);
                 break;
             case R.id.txt_map:
                 tabMap.setSelected(true);
-                if (mapFragmet==null){
-                    mapFragmet = new mapclass();
-                }
+                mapFragmet = new mapclass();
                 transaction.replace(R.id.fragment_container,mapFragmet);
                 break;
             case R.id.txt_find:
                 tabFind.setSelected(true);
-                if (findFragmet==null){
-                    findFragmet = new findclass();
-                }
+                findFragmet = new findclass();
                 transaction.replace(R.id.fragment_container,findFragmet);
                 break;
             case R.id.txt_add:
                 tabAdd.setSelected(true);
-                if (addFragmet==null){
-                    addFragmet = new addClass();
-                }
+                addFragmet = new addClass();
                 transaction.replace(R.id.fragment_container,addFragmet);
                 break;
         }
