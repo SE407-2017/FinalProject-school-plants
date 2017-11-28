@@ -16,9 +16,11 @@ public class results extends Activity {
         setContentView(R.layout.results);
         String inp = getIntent().getStringExtra("input");
         Plant respla = Plant.getPlantByName(inp);
-        TextView plades = findViewById(R.id.results);
-        plades.setText(getDescription(respla.getName()));
-        ImageView plapic = findViewById(R.id.picture);
+        TextView name = findViewById(R.id.plantsName);
+        TextView description = findViewById(R.id.plantsDescriptions);
+        description.setText(getDescription(respla.getName()));
+        name.setText(inp);
+        ImageView plapic = findViewById(R.id.plantsImage);
         plapic.setImageBitmap(getPhoto(respla.getName()));
     }
 
