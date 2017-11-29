@@ -1,6 +1,10 @@
 package com.example.tony.finalproject_plants;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -9,11 +13,14 @@ import android.os.Bundle;
 
 
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 
@@ -35,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private mapclass mapFragmet;
     private findclass findFragmet;
     private addClass addFragmet;
+    private String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.CHANGE_WIFI_STATE,Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+            Manifest.permission.CAMERA};
 
     Typeface mtypeface;
 
@@ -45,6 +56,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SDKInitializer.initialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            for(int i=0;i<permissions.length;i++){
+                int j=ContextCompat.checkSelfPermission(this,permissions[i]);
+                    if (j!=PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this,permissions,666);
+                    };
+            }
+            Toast.makeText(this, "Success of access to permissions", Toast.LENGTH_SHORT).show();
+        }
 
         setDefaultFragment();
 
@@ -62,30 +82,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(view.getId()){
             case R.id.txt_note:
                 tabNote.setSelected(true);
-                if (noteFragment==null){
-                    noteFragment = new noteclass();
-                }
+                noteFragment = new noteclass();
                 transaction.replace(R.id.fragment_container,noteFragment);
                 break;
             case R.id.txt_map:
                 tabMap.setSelected(true);
-                if (mapFragmet==null){
-                    mapFragmet = new mapclass();
-                }
+                mapFragmet = new mapclass();
                 transaction.replace(R.id.fragment_container,mapFragmet);
                 break;
             case R.id.txt_find:
                 tabFind.setSelected(true);
-                if (findFragmet==null){
-                    findFragmet = new findclass();
-                }
+                findFragmet = new findclass();
                 transaction.replace(R.id.fragment_container,findFragmet);
                 break;
             case R.id.txt_add:
                 tabAdd.setSelected(true);
-                if (addFragmet==null){
-                    addFragmet = new addClass();
-                }
+                addFragmet = new addClass();
                 transaction.replace(R.id.fragment_container,addFragmet);
                 break;
         }
