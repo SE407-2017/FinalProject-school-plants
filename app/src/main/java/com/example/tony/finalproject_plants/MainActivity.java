@@ -109,16 +109,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //创建数据库
     private void createSQL(){
-        SQLiteDatabase db = Connector.getDatabase();
-        try {
-            DataSupport.deleteAll(Plant.class);
-            InputStream xmlFile = MainActivity.this.getAssets().open("plants.xml");
-            List<Plant> plantList = XmlHelper.getPalntList(xmlFile);
-            DataSupport.saveAll(plantList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        SharedHelper helper = new SharedHelper(getApplicationContext());
+        if (helper.readStartStatus()) {
+            SQLiteDatabase db = Connector.getDatabase();
+            try {
+                InputStream xmlFile = MainActivity.this.getAssets().open("plants.xml");
+                List<Plant> plantList = XmlHelper.getPalntList(xmlFile);
+                DataSupport.saveAll(plantList);
+                helper.saveStartStatus(false);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
