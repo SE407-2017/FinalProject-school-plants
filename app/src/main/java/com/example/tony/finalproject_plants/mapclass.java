@@ -11,39 +11,56 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.SupportMapFragment;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.model.LatLngBounds;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.baidu.location.h.k.v;
+import static com.example.tony.finalproject_plants.Plant.getAllPlants;
+
 /**
- * Created by zhang on 2017/10/22.
+ * Created by zhangzhenrui on 2017/10/22.
  */
 
 public class mapclass extends android.app.Fragment {
 
-    // 百度地图相关
+    //百度地图相关
     private TextureMapView mMapView = null;
     private BaiduMap mBaiduMap = null;
-    private Marker mMarkerA;
     private MapStatusUpdate msu = null;
 
-    // 定位相关
+    //定位相关
     private boolean isFirstGetLocation=true;
     private LocationClient mLocationClient = null;
     MyLocationListener mLocationListener;
 
-    //构建MarkerOption，用于在地图上添加Marker
-    LatLng pointA = new LatLng(31.0290702492,121.4414345747);
-    BitmapDescriptor bdA = BitmapDescriptorFactory
+    //Marker相关
+    private List<LatLng> latLng = new ArrayList<>();
+    private List<Marker> markerList = new ArrayList<>();
+    private List<OverlayOptions> overlayOptions = new ArrayList<>();
+    private List<Plant> plantList = getAllPlants();
+    BitmapDescriptor bd = BitmapDescriptorFactory
             .fromResource(R.drawable.icon_gcoding);
 
     @Override
@@ -57,17 +74,16 @@ public class mapclass extends android.app.Fragment {
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.map, container, false);
-        mMapView = view.findViewById(R.id.map_view);
+        mMapView = (TextureMapView) view.findViewById(R.id.map_view);
         mBaiduMap = mMapView.getMap();// 从地图视图中获取百度地图实例对象
-// 设置地图初始化缩放比例
-        msu = MapStatusUpdateFactory.zoomTo(17.0f);// 这里的显示等级第15级
+
+        msu = MapStatusUpdateFactory.zoomTo(17.0f);// 设置地图初始化缩放比例
         mBaiduMap.setMapStatus(msu);
         mLocationClient = new LocationClient(getActivity().getApplicationContext()); //定位客户端
         mLocationListener = new MyLocationListener();  //定位监听器
-//绑定定位监听器
-        mLocationClient.registerLocationListener(mLocationListener);
+        mLocationClient.registerLocationListener(mLocationListener);//绑定定位监听器
 
-//对定位参数进行配置 LocationClientOption
+        //对定位参数进行配置
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationMode.Hight_Accuracy);
         option.setCoorType("bd09ll");
@@ -75,38 +91,42 @@ public class mapclass extends android.app.Fragment {
         option.setIsNeedAddress(true);
         option.setOpenGps(true);
 
-//设置定位参数
-        mLocationClient.setLocOption(option);
+        mLocationClient.setLocOption(option);//设置定位参数
         mBaiduMap.setMyLocationEnabled(true);//开启定位图层
-        initOverLay();
+
+        //初始化标记并显示
+        addPlantsOverlay();
+
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener()
         {
             public boolean onMarkerClick(final Marker marker)
             {
-                //创建InfoWindow展示的view
+                //点击出现简介按钮
                 Button button = new Button(getActivity().getApplicationContext());
                 button.setBackgroundResource(R.drawable.popup);
 
-//定义用于显示该InfoWindow的坐标点
-                if(marker == mMarkerA)
-                {
-                    button.setText("石楠花");
-                    InfoWindow mInfoWindow = new InfoWindow(button, pointA, -47);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
-                    button.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(mapclass.this.getActivity(),results.class);
-                            intent.putExtra("name", "photinia");
-                            intent.setFlags(6);
-                            startActivity(intent);
-                        }
-                    });
-                }
+                final Plant plant = (Plant)marker.getExtraInfo().get("plant");
+
+                button.setText(plant.getName());
+                LatLng latLng = new LatLng(plant.getLat(), plant.getLng());
+                InfoWindow mInfoWindow = new InfoWindow(button, latLng, -47);
+                mBaiduMap.showInfoWindow(mInfoWindow);
+
+                //定义用于显示该InfoWindow的坐标点
+                button.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mapclass.this.getActivity(),results.class);
+                        intent.putExtra("name", plant.getName());
+                        startActivity(intent);
+                    }
+                });
+
                 return false;
             }
         });
         return view;
+
     }
 
     @Override
@@ -156,20 +176,21 @@ public class mapclass extends android.app.Fragment {
         {
             mMapView.onDestroy(); // 使百度地图地图控件和Fragment的生命周期保持一致
         }
-        bdA.recycle();
+        bd.recycle();
 
     }
 
+    //定位监听器
     public class MyLocationListener implements BDLocationListener
     {
         @Override
         public void onReceiveLocation(BDLocation location)
         {
 
-//判断是否为首次获取到位置数据
+            //判断是否为首次获取到位置数据
             if (isFirstGetLocation)
             {
-//如果为首次定位，则直接定位到当前用户坐标
+                //如果为首次定位，则直接定位到当前用户坐标
                 LatLng latLng=new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatusUpdate msuLocationMapStatusUpdate=MapStatusUpdateFactory//
                         .newLatLng(latLng);
@@ -180,21 +201,20 @@ public class mapclass extends android.app.Fragment {
         }
     }
 
-    public void initOverLay()
+    public void addPlantsOverlay()
     {
-
-        //构建Marker图标
-
-        OverlayOptions optionA = new MarkerOptions()
-                .position(pointA)
-                .icon(bdA);
-
-        //在地图上添加Marker，并显示
-        mMarkerA = (Marker)mBaiduMap.addOverlay(optionA);
-
+        int len = plantList.size();
+        for (int i=0; i<len; i++)
+        {
+            Plant plant  = plantList.get(i);
+            latLng.add(new  LatLng(plant.getLat(), plant.getLng()));
+            overlayOptions.add(new MarkerOptions().position(latLng.get(i))
+                    .icon(bd));
+            Marker marker = (Marker) (mBaiduMap.addOverlay(overlayOptions.get(i)));
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("plant", plant);
+            marker.setExtraInfo(bundle);
+        }
     }
 
-
 }
-
-
