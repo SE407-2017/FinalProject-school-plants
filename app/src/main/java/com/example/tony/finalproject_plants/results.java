@@ -14,7 +14,7 @@ public class results extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.results);
-        String inp = getIntent().getStringExtra("input");
+        String inp = getIntent().getStringExtra("name");
         Plant respla = Plant.getPlantByName(inp);
         TextView name = findViewById(R.id.plantsName);
         TextView description = findViewById(R.id.plantsDescriptions);

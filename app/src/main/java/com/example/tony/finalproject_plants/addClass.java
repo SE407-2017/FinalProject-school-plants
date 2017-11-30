@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -22,6 +23,7 @@ public class addClass extends Fragment {
     public static final int TAKE_PHOTO =1;
 
     private Button take_photo;
+    private Button submit;
     private ImageView new_image;
     private EditText new_name;
     private EditText new_info;
@@ -32,6 +34,7 @@ public class addClass extends Fragment {
         View view=layoutInflater.inflate(R.layout.add,container,false);
 
         take_photo= view.findViewById(R.id.take_photo);
+        submit=view.findViewById(R.id.submit);
         new_image= view.findViewById(R.id.new_plant_image);
         new_name= view.findViewById(R.id.new_plant_name);
         new_info= view.findViewById(R.id.new_plant_info);
@@ -52,6 +55,14 @@ public class addClass extends Fragment {
                 imageUri=Uri.fromFile(outputImage);
                 Intent intent=new Intent("android.media.action.IMAGE_CAPTURE");
                 startActivityForResult(intent,TAKE_PHOTO);
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast toast = Toast.makeText(addClass.this.getActivity(),"添加成功!",Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
         return view;

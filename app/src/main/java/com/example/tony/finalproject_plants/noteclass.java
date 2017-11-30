@@ -91,7 +91,7 @@ public class noteclass extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position,long id){
                 Plant plant = listViewPlants.get(position);
-                Intent intent = new Intent(noteclass.this.getActivity(),plants.class);
+                Intent intent = new Intent(noteclass.this.getActivity(),results.class);
                 intent.putExtra("name", listViewPlants.get(position).getName());
                 startActivity(intent);
             }

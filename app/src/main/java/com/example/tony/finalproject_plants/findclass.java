@@ -25,7 +25,7 @@ public class findclass extends Fragment {
             public void onClick(View v) {
                 String inf = inp.getText().toString();
                 Intent intent = new Intent(findclass.this.getActivity(),results.class);
-                intent.putExtra("input",inf);
+                intent.putExtra("name",inf);
                 respla = Plant.getPlantByName(inf);
                 if (respla!=null) {
                     startActivity(intent);
