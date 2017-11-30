@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
@@ -13,9 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +73,9 @@ public class noteclass extends Fragment {
     private List<Plant> listViewPlants = new ArrayList<>();
     private List<Plant> plantsList = Plant.getAllPlants();
 
+    private PlantAdapter adapter;
+    private ListView listView;
+
     @Nullable
     @Override
     @RequiresApi (api = Build.VERSION_CODES.KITKAT)
@@ -76,15 +83,15 @@ public class noteclass extends Fragment {
         View view = inflater.inflate(R.layout.note, container, false);
         initlist_view_plants();
 
-        PlantAdapter adapter = new PlantAdapter(noteclass.this.getActivity(),R.layout.plants_item,listViewPlants);
-        ListView listView = view.findViewById(R.id.list_view);
+        adapter = new PlantAdapter(noteclass.this.getActivity(),R.layout.plants_item,listViewPlants);
+        listView = view.findViewById(R.id.list_view);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position,long id){
                 Plant plant = listViewPlants.get(position);
-                Intent intent = new Intent(noteclass.this.getActivity(),plants.class);
+                Intent intent = new Intent(noteclass.this.getActivity(),results.class);
                 intent.putExtra("name", listViewPlants.get(position).getName());
                 startActivity(intent);
             }
@@ -98,4 +105,29 @@ public class noteclass extends Fragment {
             listViewPlants.add(p);
         }
     }
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case NetUtils.MSG_REFRESH:
+                    Toast.makeText(getActivity(), "下载完成", Toast.LENGTH_SHORT).show();
+                    listViewPlants = Plant.getAllPlants();
+                    adapter = new PlantAdapter(noteclass.this.getActivity(),R.layout.plants_item,listViewPlants);
+                    listView.setAdapter(adapter);
+                    break;
+            }
+        }
+    };
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Button download = getActivity().findViewById(R.id.download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NetUtils.testDownload(getActivity(), mHandler);
+            }
+        });
+    }
+
 }

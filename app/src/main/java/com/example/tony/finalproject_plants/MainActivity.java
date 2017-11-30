@@ -42,9 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private mapclass mapFragmet;
     private findclass findFragmet;
     private addClass addFragmet;
+
     private String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.CHANGE_WIFI_STATE,Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+            Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.CHANGE_WIFI_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.INTERNET,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
             Manifest.permission.CAMERA};
 
     Typeface mtypeface;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SDKInitializer.initialize(getApplicationContext());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             for(int i=0;i<permissions.length;i++){
                 int j=ContextCompat.checkSelfPermission(this,permissions[i]);
@@ -63,13 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         ActivityCompat.requestPermissions(this,permissions,666);
                     };
             }
-            Toast.makeText(this, "Success of access to permissions", Toast.LENGTH_SHORT).show();
         }
 
         setDefaultFragment();
-
         mtypeface=Typeface.createFromAsset(getAssets(),"hey.ttf");
-
         bindView();
         createSQL();
     }
@@ -109,16 +108,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //创建数据库
     private void createSQL(){
-        SQLiteDatabase db = Connector.getDatabase();
-        try {
-            DataSupport.deleteAll(Plant.class);
-            InputStream xmlFile = MainActivity.this.getAssets().open("plants.xml");
-            List<Plant> plantList = XmlHelper.getPalntList(xmlFile);
-            DataSupport.saveAll(plantList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        SharedHelper helper = new SharedHelper(getApplicationContext());
+        if (helper.readStartStatus()) {
+            SQLiteDatabase db = Connector.getDatabase();
+            try {
+                InputStream xmlFile = MainActivity.this.getAssets().open("plants.xml");
+                List<Plant> plantList = XmlHelper.getPalntList(xmlFile);
+                DataSupport.saveAll(plantList);
+                helper.saveStartStatus(false);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

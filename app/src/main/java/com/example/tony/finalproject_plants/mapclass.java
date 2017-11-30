@@ -96,7 +96,7 @@ public class mapclass extends android.app.Fragment {
                     button.setOnClickListener(new View.OnClickListener(){
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(mapclass.this.getActivity(),plants.class);
+                            Intent intent = new Intent(mapclass.this.getActivity(),results.class);
                             intent.putExtra("name", "photinia");
                             intent.setFlags(6);
                             startActivity(intent);

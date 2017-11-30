@@ -38,6 +38,12 @@ public class XmlHelper {
                     }else if ("photo_path".equals(pullParser.getName())){
                         String photo_path = pullParser.nextText();
                         plant.setphotoPath(photo_path);
+                    }else if ("lat".equals(pullParser.getName())){
+                        double lat = Double.parseDouble(pullParser.nextText());
+                        plant.setLat(lat);
+                    }else if ("lng".equals(pullParser.getName())){
+                        double lng = Double.parseDouble(pullParser.nextText());
+                        plant.setLng(lng);
                     }
                     break;
                 case XmlPullParser.END_TAG:

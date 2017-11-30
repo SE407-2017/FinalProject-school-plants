@@ -16,7 +16,7 @@
 
     <EditText
         android:id="@+id/search_text"
-        android:hint="请输入相应植物的英文名"
+        android:hint="请输入相应植物的名称"
         android:textColorHint="@color/text_blue"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
