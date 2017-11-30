@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plants>
     <plant id="1">
-        <name>石兰花</name>
+        <name>石楠花</name>
         <description_path>plant_descriptions/photinia.txt</description_path>
         <photo_path>plant_photos/photinia.png</photo_path>
-        <lat>31.09</lat>
-        <lng>121.44</lng>
+        <lat>31.023756</lat>
+        <lng>121.434636</lng>
     </plant>
     <plant id="2">
         <name>杜鹃</name>
         <description_path>plant_descriptions/planch.txt</description_path>
         <photo_path>plant_photos/planch.png</photo_path>
-        <lat>31.09</lat>
-        <lng>121.44</lng>
+        <lat>31.02716</lat>
+        <lng>121.434492</lng>
     </plant>
     <plant id="3">
         <name>月季</name>
         <description_path>plant_descriptions/jacq.txt</description_path>
         <photo_path>plant_photos/jacq.png</photo_path>
-        <lat>31.09</lat>
-        <lng>121.44</lng>
+        <lat>31.03044</lat>
+        <lng>121.455441</lng>
     </plant>
     <plant id="4">
         <name>黄馨</name>
         <description_path>plant_descriptions/hance.txt</description_path>
         <photo_path>plant_photos/hance.png</photo_path>
-        <lat>31.09</lat>
-        <lng>121.44</lng>
+        <lat>31.035422</lat>
+        <lng>121.4475</lng>
     </plant>
     <plant id="5">
         <name>广玉兰</name>
         <description_path>plant_descriptions/linn.txt</description_path>
         <photo_path>plant_photos/linn.png</photo_path>
-        <lat>31.09</lat>
-        <lng>121.44</lng>
+        <lat>31.033875</lat>
+        <lng>121.454758</lng>
     </plant>
 </plants>
