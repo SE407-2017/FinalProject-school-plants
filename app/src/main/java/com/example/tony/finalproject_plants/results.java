@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class results extends Activity {
         Plant respla = Plant.getPlantByName(inp);
         TextView name = findViewById(R.id.plantsName);
         TextView description = findViewById(R.id.plantsDescriptions);
+        description.setMovementMethod(ScrollingMovementMethod.getInstance());
         description.setText(getDescription(respla.getName()));
         name.setText(inp);
         ImageView plapic = findViewById(R.id.plantsImage);

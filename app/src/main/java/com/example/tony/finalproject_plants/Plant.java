@@ -4,13 +4,14 @@ import android.widget.ImageButton;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 郭云浩 on 2017/10/22.
  */
 
-public class Plant extends DataSupport {
+public class Plant extends DataSupport implements Serializable {
     private int id;
     private String name;
     private String photoPath;
