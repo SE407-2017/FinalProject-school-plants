@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -54,13 +55,15 @@ public class NetUtils {
         final String pho_path = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath();
         final OkHttpClient client = new OkHttpClient();
         final String fileDir = doc_path + "/plants.xml";
-        final String url_xml = NetUtils.URL + "/all.xml";//http://ozyv1gfyf.bkt.clouddn.com/all.xml
+        Random random = new Random();
+        final String url_xml = NetUtils.URL + "/plants.xml"+"?v=" + random.nextInt();//http://ozyv1gfyf.bkt.clouddn.com/all.xml？v=123
         new Thread(new Runnable() {
             @Override
             public void run() {
                 NetUtils.download(url_xml, client, fileDir);
                 File plantsfile = new File(doc_path+"/plants.xml");
                 try {
+                    Random random = new Random();
                     InputStream plantsfilestream = new FileInputStream(plantsfile);
                     List<Plant> plantList = XmlHelper.getPalntList(plantsfilestream);
                     for (Plant p : plantList){//查找是否存在
@@ -69,8 +72,8 @@ public class NetUtils {
                         }
                         String descriName = p.getDescriptionPath().substring(p.getDescriptionPath().lastIndexOf("/")+1);
                         String photoName = p.getphotoPath().substring(p.getphotoPath().lastIndexOf("/")+1);
-                        Boolean download_descri = NetUtils.download(p.getDescriptionPath(), client, doc_path+"/"+descriName);
-                        Boolean download_photo = NetUtils.download(p.getphotoPath(), client, pho_path+"/"+photoName);
+                        Boolean download_descri = NetUtils.download(p.getDescriptionPath()+"?v="+random.nextInt(), client, doc_path+"/"+descriName);
+                        Boolean download_photo = NetUtils.download(p.getphotoPath()+"?v="+random.nextInt(), client, pho_path+"/"+photoName);
                         if (download_descri && download_photo){
                             p.setDescriptionPath(descriName);
                             p.setphotoPath(photoName);
