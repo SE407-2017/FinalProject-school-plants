@@ -1,0 +1,57 @@
+使用Visual Studio App Center的自动测试对本组app进行了测试。使用Xamarin.UITest测试框架对云中的235个可用设备进行了应用测试，得到了对于初始化结果（界面进入初始化时点击获取权限），界面交互结果（各个界面输入文本，按下按钮）与功能实现的测试结果。
+
+测试结果：
+在存在的235个可用设备中，有197个可以运行我们的app。
+针对可以运行的设备进行Arrange-Act-Assert测试模式发现（较为普遍的测试结果如下，部分机型存在初始化的问题与相机使用问题）：
+界面初始化点击获取权限成功
+note界面，点击测试成功
+map界面，无测试
+results界面，无测试
+add界面，激活设备相机成功，点击测试成功，文本输入测试成功。
+
+较为普遍存在的的问题（主要是建立过程）（截取主要的出错报告）
+===========================================================================
+Task         : Gradle
+Description  : Build using a Gradle wrapper script
+Version      : 1.125.0
+Author       : Microsoft Corporation
+Help         : [More Information](https://go.microsoft.com/fwlink/?LinkID=613720)
+===========================================================================
+
+SYSTEMVSSCONNECTION exists true
+[command]/Users/vsts/agent/2.124.0/work/1/s/gradlew -DMOBILECENTER_BUILD_VERSION=13 clean :app:assembleRelease :app:testRelease :app:lintRelease
+Starting a Gradle Daemon (subsequent builds will be faster)
+Gradle 3.3
+Resolved com.android.tools.build:gradle:3.0.0 in :classpath 
+Project is either no Android app project or build version has not been set to override
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file '/Users/vsts/agent/2.124.0/work/1/s/build.gradle' line: 22
+
+* What went wrong:
+A problem occurred evaluating root project 's'.
+> Could not find method google() for arguments [] on repository container.
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 45.942 secs
+Error: /Users/vsts/agent/2.124.0/work/1/s/gradlew failed with return code: 1
+    at ChildProcess.<anonymous> (/Users/vsts/agent/2.124.0/work/_tasks/Gradle_8d8eebd8-2b94-4c97-85af-839254cc6da4/1.125.0/node_modules/vsts-task-lib/toolrunner.js:569:30)
+    at emitTwo (events.js:106:13)
+    at ChildProcess.emit (events.js:191:7)
+    at maybeClose (internal/child_process.js:886:16)
+    at Socket.<anonymous> (internal/child_process.js:342:11)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at Pipe._handle.close [as _onclose] (net.js:497:12)
+
+##[warning]No test result files matching /Users/vsts/agent/2.124.0/work/1/s/**/build/test-results/TEST-*.xml were found, so publishing JUnit test results is being skipped.
+##[error]Error: /Users/vsts/agent/2.124.0/work/1/s/gradlew failed with return code: 1
+##[section]Async Command Start: Telemetry
+##[section]Async Command End: Telemetry
+##[section]Finishing: Gradle Task
